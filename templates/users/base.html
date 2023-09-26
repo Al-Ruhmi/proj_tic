@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if request.user.is_student %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">HOME</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collaps"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                      <a class="nav-link active" href="{% url 'create_ticket' %}"> CREATE TICKET </a>
+                    </li>
+                  <li class="nav-item">
+                      <a class="nav-link active" href="{% url 'all_tickets' %}"> VIEW TICKETS</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'update_student' user.pk %}"> UPDATE STUDENT</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="{% url 'student_details' %}"> STUDENT DETAILS</a>
+              </li>
+                </ul>
+              </div>
+
+        </div>
+        <span class="hellow-msg">Hellow : {{request.user}}</span>
+        <span ><a class="hellow-msg" href="{% url 'logout' %}">LOGOUT</a></span>
+    </nav>
+
+    {% elif request.user.is_employee %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">HOME</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collaps"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                   <a class="nav-link active" href="{% url 'ticket_queue' %}"> TICKETS QUEUE </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'workspace' %}"> WORKSPACE</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'all_closed_tickets' %}"> COMPELETED TICKETS</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'all_rejected_tickets' %}"> REJECTED TICKETS</a>
+                  </li>
+                </ul>
+              </div>
+
+        </div>
+        <span class="hellow-msg">Hellow : {{request.user}}</span>
+        <span ><a class="hellow-msg" href="{% url 'logout' %}">LOGOUT</a></span>
+    </nav>
+    {% endif %}
+    
+</body>
+</html>
+
+<!-- <img width="50px" height="30px" src="">
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button> -->
+
+
+<!-- {% load static %} -->
+
+<style>
+  .hellow-msg{
+    font-size: 18px;
+    color: #fff;
+    margin-right: 20px ;
+  }
+</style>
+
+
+
+<div class="container mt-5">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert-{{message.tags}} mx-auto " role="alert">
+        <b>{{message}}</b>
+
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>

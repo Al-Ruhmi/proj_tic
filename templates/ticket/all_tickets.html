@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+<div class="row">
+  <div class="col">
+      <div class="col-md">
+          <div class="card text-center text-white mb-3 " id="total-orders">
+              <div class="card-header">
+                  <h5 class="card-title"> Total Student Tickets </h5>
+              </div>
+              <div class="card-body">
+                  <h3 class="card-title">{{total_tickets}}</h3>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+      <div class="col-md">
+          <div class="card text-center text-white mb-3 " id="orders-pending">
+              <div class="card-header">
+                  <h5 class="card-title">Tickets Opened</h5>
+              </div>
+              <div class="card-body">
+                  <h3 class="card-title">{{open}}</h3>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col">
+      <div class="col-md">
+          <div class="card text-center text-white mb-3 " id="orders-processed">
+              <div class="card-header">
+                  <h5 class="card-title"> Tickets Proccessing</h5>
+              </div>
+              <div class="card-body">
+                  <h3 class="card-title">{{proccess}}</h3>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col">
+      <div class="col-md">
+          <div class="card text-center text-white mb-3 " id="orders-delivered">
+              <div class="card-header">
+                  <h5 class="card-title"> Tickets Completed</h5>
+              </div>
+              <div class="card-body">
+                  <h3 class="card-title">{{complete}}</h3>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col">
+      <div class="col-md">
+          <div class="card text-center text-white mb-3 " id="orders-rejected">
+              <div class="card-header">
+                  <h5 class="card-title"> Tickets Rejected</h5>
+              </div>
+              <div class="card-body">
+                  <h3 class="card-title">{{reject}}</h3>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="card mx-auto" style="width: 76rem;">
+    <div class="card-body">
+      <center>
+        <h3 class="card-title mb-3"> All Tickets : {{total_tickets}}</h3>
+      </center>
+        
+        <table class="table table-sm">
+            <thead>
+              <tr>
+            <thead>
+              <tr>
+                
+                <th scope="col">Ticket ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Created On</th>
+                <th scope="col">Assigned To</th>
+                <th scope="col">Status</th>
+                <th scope="col">Archived</th>
+                <th scope="col">Deleted</th>
+                <th scope="col">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {% for ticket in tickets %}
+                
+                <td><small>{{ticket.ticket_number}}</small></td>
+                <td><small>{{ticket.title}}</small></td>
+                <td><small>{{ticket.date_created}}</small></td>
+                {% if ticket.assigned_to %}
+                <td><small>{{ticket.assigned_to}}</small></td>
+                {% else %}
+                <td><small>Not Assigned</small></td>
+                {% endif %}
+                {% if ticket.ticket_status == 'Processing' %}
+                <td><span class="badge bg-success">Processing</span></td>
+                {% elif ticket.ticket_status == 'Opening' %}
+                <td><span class="badge bg-warning">Opening</span></td>
+                {% elif ticket.ticket_status == 'Completed' %}
+                <td><span class="badge bg-success">Completed</span></td>
+                {% elif ticket.ticket_status == 'Rejected' %}
+                <td><span class="badge bg-danger">Rejected</span></td>
+                {% endif %}
+
+
+                {% if ticket.ticket.is_archived %}
+                <td><a class="btn btn-outline-warning btn-sm btn-block" href="#">{{ticket.is_archived}}</a></td>
+                {% else %}
+                <td><a class="btn btn-outline-warning btn-sm btn-block" href="#">{{ticket.is_archived}}</a></td>
+                {% endif %}
+                {% if ticket.ticket.is_deleted %}
+                <td><a class="btn btn-outline-danger btn-sm btn-block" href="{% url 'dashboard' %}">{{ticket.is_deleted}}</a></td>
+                
+                
+                {% elif not ticket.ticket.is_deleted %}
+                <td><a class="btn btn-outline-danger btn-sm btn-block" href="{% url 'ticket_deletion' ticket.pk %}">{{ticket.is_deleted}}</a></td>
+                {% endif %}
+                <td><a class="btn btn-outline-info btn-sm btn-block" href="{% url 'ticket_details' ticket.pk %}">View</a></td>
+              </tr>
+              {% endfor %}
+
+
+              </tr>
+            </tbody>
+          </table>
+
+    </div>
+
+</div>
+
+{% endblock content %}

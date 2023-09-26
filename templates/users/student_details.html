@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+{% csrf_token %}
+<h1>All Student's Details :</h1>
+
+<br>    
+<div class="col"><b>User Name :</b> {{request.user}}</div>
+<br>
+<div class="col"><b>First Name :</b> {{request.user.name}}</div>
+<br>
+<div class="col"><b>Last Name :</b> {{request.user.surename}}</div>
+<br>
+<div class="col"><b>birth date :</b> {{request.user.birth_date}}</div>
+<br>
+<div class="col"><b>Address :</b> {{request.user.address}}</div>
+<br>
+<div class="col"><b>City :</b> {{request.user.city}}</div>
+<br>
+<div class="col"><b>Country :</b> {{request.user.country}}</div>
+<br>
+<div class="col"><b>Photo :</b> {{request.user.std_pic}}</div>
+<br>
+<div class="col"><b>Passport Front Picture :</b> {{request.user.std_pic_pass_fro}}</div>
+<br>
+<div class="col"><b>Passport Back Picture :</b> {{request.user.std_pic_pass_bac}}</div>
+<br>
+
+
+{% endblock content %}

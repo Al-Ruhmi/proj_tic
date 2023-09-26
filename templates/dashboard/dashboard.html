@@ -1,0 +1,193 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- صفحة الطلاب ------------------ -->
+
+{% if request.user.is_student %}
+<center>
+    <h1 style="color: #0c0a06; background-color:rgb(16, 139, 0); margin:20px;" > Students Dashboard</h1>
+</center>
+
+<section class="container mt-3">
+    <div class="p-3 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-1">
+            <p class="col-md-8 fs-4">
+                <h1 class="display-5 fw-bold" style="color: rgb(27, 83, 60);">Welcome Student : ( {{request.user}} ) In Your Dashboard  </h1>
+
+            </p>
+            
+
+        </div>
+
+    </div>
+    
+</section>
+
+<div class="row">
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-white mb-3 " id="total-orders">
+                <div class="card-header">
+                    <h5 class="card-title"> Total Student self Tickets </h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{total_tickets}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-white mb-3 " id="orders-pending">
+                <div class="card-header">
+                    <h5 class="card-title">Tickets Pending</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{open}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-white mb-3 " id="orders-processed">
+                <div class="card-header">
+                    <h5 class="card-title"> Tickets Proccessing</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{proccess}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-white mb-3 " id="orders-delivered">
+                <div class="card-header">
+                    <h5 class="card-title"> Tickets Completed</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{complete}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-white mb-3 " id="orders-rejected">
+                <div class="card-header">
+                    <h5 class="card-title"> Tickets Rejected</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{reject}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<!-- صفحة الموظفين ----------- -->
+
+{% elif request.user.is_employee %}
+<center>
+    <h1 style="color: #0a0806; background-color:rgb(190, 118, 175); margin:20px;" >Employees Dashboard</h1>
+</center>
+
+
+
+
+<section class="container mt-3">
+    <div class="p-3 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-1">
+            
+            <p class="col-md-8 fs-4">
+                <h1 class="display-5 fw-bold" style="color: blueviolet;">Welcome Employee : ( {{request.user}} ) In Your Dashboard </h1>
+
+            </p>
+
+        </div>
+
+    </div>
+
+<div class="row">
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-white mb-3 " id="total-orders">
+                <div class="card-header">
+                    <h5 class="card-title"> Total Students Tickets </h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{total_tickets}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-white mb-3 " id="orders-delivered">
+                <div class="card-header">
+                    <h5 class="card-title">Tickets Pending</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{all_tic}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-white mb-3 " id="orders-pending">
+                <div class="card-header">
+                    <h5 class="card-title"> Tickets Proccessing</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{proccess}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-white mb-3 " id="orders-pending">
+                <div class="card-header">
+                    <h5 class="card-title"> Tickets Completed</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{complete}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-white mb-3 " id="orders-pending">
+                <div class="card-header">
+                    <h5 class="card-title"> Tickets Rejected</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{reject}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+    
+</section>
+
+
+{% endif %}
+
+
+{% endblock content %}
